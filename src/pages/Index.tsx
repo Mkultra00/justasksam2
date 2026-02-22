@@ -26,7 +26,7 @@ const Index = () => {
       <div className="bg-primary/5 border-b border-primary/10 px-4 py-3">
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
           <Shield className="inline-block w-4 h-4 mr-1 -mt-0.5 text-primary" />
-          FamilyFirst AI is <strong>not</strong> a substitute for professional medical advice. Always consult your pediatrician.
+          Just Ask Sam 2 is <strong>not</strong> a substitute for professional medical advice. Always consult your pediatrician.
         </p>
       </div>
 
@@ -40,7 +40,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Heart className="w-8 h-8 text-primary fill-primary/20" />
             <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground tracking-tight">
-              FamilyFirst AI
+              Just Ask Sam 2
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
@@ -142,7 +142,7 @@ const Index = () => {
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground">
-            When in doubt, always call your doctor. FamilyFirst AI provides guidance, not diagnoses.
+            When in doubt, always call your doctor. Just Ask Sam 2 provides guidance, not diagnoses.
           </p>
         </motion.section>
       </main>
