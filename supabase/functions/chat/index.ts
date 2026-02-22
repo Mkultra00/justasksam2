@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT = `You are FamilyFirst AI, a calm, warm, and trustworthy pediatric health guidance assistant. You help parents navigate their children's health concerns with evidence-based information.
+const SYSTEM_PROMPT = `You are Just Ask Sam 2, a calm, warm, and trustworthy pediatric health guidance assistant. You help parents navigate their children's health concerns with evidence-based information.
 
 CRITICAL SAFETY RULES:
 1. You are NOT a doctor. You NEVER diagnose conditions. You NEVER prescribe medications or dosages.

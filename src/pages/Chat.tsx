@@ -85,7 +85,7 @@ const Chat = () => {
         <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <h1 className="text-lg font-serif font-semibold text-foreground">FamilyFirst AI</h1>
+        <h1 className="text-lg font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
         <div className="flex gap-1">
           {messages.length > 0 && (
             <Button variant="ghost" size="icon" onClick={clearMessages}>
