@@ -87,7 +87,7 @@ const Chat = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div className="flex items-center gap-2">
-          <img src={samAvatar} alt="Sam avatar" className="w-8 h-8 rounded-full" />
+          <img src={samAvatar} alt="Sam avatar" className="w-10 h-10 rounded-full shadow-sm" />
           <h1 className="text-lg font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
         </div>
         <div className="flex gap-1">
