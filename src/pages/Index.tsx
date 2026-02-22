@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Shield, MessageCircle, ArrowRight } from "lucide-react";
+import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AGE_GROUPS, SCENARIO_CARDS, type AgeGroup } from "@/lib/constants";
@@ -37,8 +38,8 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Heart className="w-8 h-8 text-primary fill-primary/20" />
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img src={samAvatar} alt="Sam avatar" className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-md" />
             <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground tracking-tight">
               Just Ask Sam 2
             </h1>
