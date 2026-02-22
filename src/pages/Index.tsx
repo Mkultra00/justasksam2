@@ -1,13 +1,15 @@
-import { motion } from "framer-motion";
-import { Shield, MessageCircle, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Shield, MessageCircle, ArrowRight, ChevronDown } from "lucide-react";
 import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { SCENARIO_CARDS } from "@/lib/constants";
+import { CONCERN_CATEGORIES } from "@/lib/constants";
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
 
   const handleScenario = (prompt: string) => {
     // Navigate to chat with pre-filled prompt
@@ -93,7 +95,7 @@ const Index = () => {
           </Button>
         </motion.div>
 
-        {/* Scenario Cards */}
+        {/* Concern Categories */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,21 +104,54 @@ const Index = () => {
           <h2 className="text-xl font-serif font-medium text-foreground mb-1 text-center">
             Common Concerns
           </h2>
-          <p className="text-sm text-muted-foreground text-center mb-4">
-            Tap a topic to start chatting about it
+          <p className="text-sm text-muted-foreground text-center mb-5">
+            Pick a category, then tap a topic to start chatting
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {SCENARIO_CARDS.map((card) => (
-              <button
-                key={card.id}
-                onClick={() => handleScenario(card.prompt)}
-                className="flex flex-col items-center gap-2 p-5 rounded-xl border border-border bg-card hover:bg-primary/5 hover:border-primary/30 transition-all text-center group"
-              >
-                <span className="text-3xl group-hover:scale-110 transition-transform">{card.emoji}</span>
-                <span className="text-sm font-medium text-foreground">{card.label}</span>
-              </button>
+            {CONCERN_CATEGORIES.map((cat) => (
+              <div key={cat.id} className="col-span-1">
+                <button
+                  onClick={() => setOpenCategory(openCategory === cat.id ? null : cat.id)}
+                  className={`w-full flex flex-col items-center gap-2 p-5 rounded-xl border transition-all text-center group
+                    ${openCategory === cat.id
+                      ? "border-primary bg-primary/10 shadow-sm"
+                      : "border-border bg-card hover:bg-primary/5 hover:border-primary/30"
+                    }`}
+                >
+                  <span className="text-3xl group-hover:scale-110 transition-transform">{cat.emoji}</span>
+                  <span className="text-sm font-medium text-foreground">{cat.label}</span>
+                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${openCategory === cat.id ? "rotate-180" : ""}`} />
+                </button>
+              </div>
             ))}
           </div>
+
+          {/* Expanded items */}
+          <AnimatePresence mode="wait">
+            {openCategory && (
+              <motion.div
+                key={openCategory}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  {CONCERN_CATEGORIES.find((c) => c.id === openCategory)?.items.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => handleScenario(item.prompt)}
+                      className="flex items-center gap-3 p-3 rounded-lg border border-border bg-card hover:bg-primary/5 hover:border-primary/30 transition-all text-left group"
+                    >
+                      <span className="text-xl group-hover:scale-110 transition-transform">{item.emoji}</span>
+                      <span className="text-sm font-medium text-foreground">{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.section>
 
         {/* Trust Indicators */}
