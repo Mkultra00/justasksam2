@@ -36,7 +36,7 @@ const Index = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="flex flex-col items-center justify-center gap-4 mb-4">
-            <div className="relative w-28 h-28 md:w-36 md:h-36">
+            <div className="relative w-56 h-56 md:w-72 md:h-72">
               <motion.img
                 src={samAvatar}
                 alt="Sam avatar"
