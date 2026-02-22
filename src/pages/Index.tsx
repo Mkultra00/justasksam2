@@ -39,13 +39,32 @@ const Index = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="flex flex-col items-center justify-center gap-4 mb-4">
-            <motion.img
-              src={samAvatar}
-              alt="Sam avatar"
-              className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-lg"
-              animate={{ rotate: [0, -8, 8, -5, 5, 0] }}
-              transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
-            />
+            <div className="relative w-28 h-28 md:w-36 md:h-36">
+              <motion.img
+                src={samAvatar}
+                alt="Sam avatar"
+                className="w-full h-full rounded-full shadow-lg relative z-10"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              />
+              {/* Pulsing glow overlay */}
+              <motion.div
+                className="absolute inset-0 rounded-full bg-primary/20 -z-0"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: [1, 1.15, 1], opacity: [0, 0.5, 0] }}
+                transition={{ duration: 2, delay: 1, repeat: Infinity, repeatDelay: 3 }}
+              />
+              {/* Wave hand overlay sparkle */}
+              <motion.div
+                className="absolute -top-1 -right-1 text-2xl z-20"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: [0, 1, 1, 0], scale: [0.5, 1.2, 1, 0.5], rotate: [0, 20, -10, 0] }}
+                transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
+              >
+                👋
+              </motion.div>
+            </div>
             <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground tracking-tight">
               Just Ask Sam 2
             </h1>
