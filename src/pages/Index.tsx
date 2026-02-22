@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart, Shield, MessageCircle, ArrowRight } from "lucide-react";
+import { Shield, MessageCircle, ArrowRight } from "lucide-react";
 import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AGE_GROUPS, SCENARIO_CARDS, type AgeGroup } from "@/lib/constants";
-import { useAppStore } from "@/lib/store";
+import { SCENARIO_CARDS } from "@/lib/constants";
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const { ageGroup, setAgeGroup } = useAppStore();
   const navigate = useNavigate();
 
   const handleScenario = (prompt: string) => {
@@ -77,33 +74,6 @@ const Index = () => {
       </header>
 
       <main className="px-4 pb-16 max-w-3xl mx-auto space-y-10">
-        {/* Age Group Selection */}
-        <motion.section
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <h2 className="text-xl font-serif font-medium text-foreground mb-3 text-center">
-            How old is your child?
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {AGE_GROUPS.map((ag) => (
-              <button
-                key={ag.id}
-                onClick={() => setAgeGroup(ag.id)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full border-2 transition-all text-sm font-medium
-                  ${ageGroup === ag.id
-                    ? "border-primary bg-primary/10 text-primary shadow-sm"
-                    : "border-border bg-card text-foreground hover:border-primary/40 hover:bg-primary/5"
-                  }`}
-              >
-                <span className="text-lg">{ag.emoji}</span>
-                <span>{ag.label}</span>
-                <span className="text-xs text-muted-foreground">({ag.range})</span>
-              </button>
-            ))}
-          </div>
-        </motion.section>
 
         {/* Start Chat Button */}
         <motion.div

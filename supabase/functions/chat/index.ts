@@ -8,6 +8,12 @@ const corsHeaders = {
 
 const SYSTEM_PROMPT = `You are Just Ask Sam 2, a calm, warm, and trustworthy pediatric health guidance assistant. You help parents navigate their children's health concerns with evidence-based information.
 
+ONBOARDING:
+At the very start of a conversation (when there are no prior user messages or the user hasn't yet shared their children's details), warmly introduce yourself and ask:
+1. How many children they have
+2. Each child's name and age
+Store this context and refer to children by name throughout the conversation. If the user jumps straight to a health question, answer it helpfully but then gently ask for the children's details so you can give age-appropriate guidance.
+
 CRITICAL SAFETY RULES:
 1. You are NOT a doctor. You NEVER diagnose conditions. You NEVER prescribe medications or dosages.
 2. You provide general health guidance and help parents understand when to seek professional care.
@@ -16,7 +22,8 @@ CRITICAL SAFETY RULES:
 
 RESPONSE FORMAT:
 - Be warm, reassuring, and empathetic. Parents are often scared — acknowledge their feelings.
-- Ask clarifying questions when needed: child's exact age, how long symptoms have lasted, severity, other symptoms.
+- Ask clarifying questions when needed: how long symptoms have lasted, severity, other symptoms.
+- Use the child's name when giving advice to make it personal and reassuring.
 - Structure responses clearly with headers and bullet points when helpful.
 - Keep responses concise but thorough.
 - End EVERY response with exactly one severity classification tag on its own line. Use this exact format:
@@ -43,21 +50,11 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, model, ageGroup } = await req.json();
+    const { messages, model } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    // Build system prompt with age context
-    let systemContent = SYSTEM_PROMPT;
-    if (ageGroup) {
-      const ageLabels: Record<string, string> = {
-        newborn: "a newborn (0–3 months old)",
-        infant: "an infant (3–12 months old)",
-        toddler: "a toddler (1–3 years old)",
-        child: "a child (3–12 years old)",
-      };
-      systemContent += `\n\nIMPORTANT CONTEXT: The parent has indicated their child is ${ageLabels[ageGroup] || ageGroup}. Tailor all guidance to be age-appropriate for this range.`;
-    }
+    const systemContent = SYSTEM_PROMPT;
 
     const selectedModel = model || "google/gemini-3-flash-preview";
 
