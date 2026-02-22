@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Settings, Trash2 } from "lucide-react";
+import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import ChatMessage from "@/components/ChatMessage";
 import ChatInput from "@/components/ChatInput";
@@ -85,7 +86,10 @@ const Chat = () => {
         <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <h1 className="text-lg font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
+        <div className="flex items-center gap-2">
+          <img src={samAvatar} alt="Sam avatar" className="w-8 h-8 rounded-full" />
+          <h1 className="text-lg font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
+        </div>
         <div className="flex gap-1">
           {messages.length > 0 && (
             <Button variant="ghost" size="icon" onClick={clearMessages}>
