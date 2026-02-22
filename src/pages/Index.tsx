@@ -38,8 +38,14 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <img src={samAvatar} alt="Sam avatar" className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-md" />
+          <div className="flex flex-col items-center justify-center gap-4 mb-4">
+            <motion.img
+              src={samAvatar}
+              alt="Sam avatar"
+              className="w-28 h-28 md:w-36 md:h-36 rounded-full shadow-lg"
+              animate={{ rotate: [0, -8, 8, -5, 5, 0] }}
+              transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
+            />
             <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground tracking-tight">
               Just Ask Sam 2
             </h1>
