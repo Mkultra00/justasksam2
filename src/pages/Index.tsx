@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Index = () => {
   const navigate = useNavigate();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [customInput, setCustomInput] = useState("");
 
   const handleScenario = (prompt: string) => {
     // Navigate to chat with pre-filled prompt
@@ -149,6 +150,28 @@ const Index = () => {
                     </button>
                   ))}
                 </div>
+                <form
+                  className="mt-3 flex gap-2"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (customInput.trim()) {
+                      const catLabel = CONCERN_CATEGORIES.find((c) => c.id === openCategory)?.label || "";
+                      handleScenario(`I have a ${catLabel.toLowerCase()} concern about my child: ${customInput.trim()}`);
+                      setCustomInput("");
+                    }
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={customInput}
+                    onChange={(e) => setCustomInput(e.target.value)}
+                    placeholder="Describe something else…"
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                  />
+                  <Button type="submit" size="sm" disabled={!customInput.trim()} className="rounded-lg px-4">
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </form>
               </motion.div>
             )}
           </AnimatePresence>
