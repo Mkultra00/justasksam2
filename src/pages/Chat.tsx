@@ -86,10 +86,10 @@ const Chat = () => {
         <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div className="flex items-center gap-2">
+        <button onClick={() => navigate("/")} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <img src={samAvatar} alt="Sam avatar" className="w-10 h-10 rounded-full shadow-sm" />
           <h1 className="text-lg font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
-        </div>
+        </button>
         <div className="flex gap-1">
           {messages.length > 0 && (
             <Button variant="ghost" size="icon" onClick={clearMessages}>
