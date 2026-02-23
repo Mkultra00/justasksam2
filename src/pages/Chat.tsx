@@ -87,7 +87,7 @@ const Chat = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <button onClick={() => navigate("/")} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <img src={samAvatar} alt="Sam avatar" className="w-8 h-8 rounded-full shadow-sm" />
+          <img src={samAvatar} alt="Sam avatar" className="w-[51px] h-[51px] rounded-full shadow-sm" />
           <h1 className="text-2xl font-serif font-semibold text-foreground">Just Ask Sam 2</h1>
         </button>
         <div className="flex gap-1">
