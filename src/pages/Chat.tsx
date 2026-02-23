@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Settings, Trash2 } from "lucide-react";
 import samAvatar from "@/assets/sam-avatar.png";
@@ -30,6 +30,54 @@ const Chat = () => {
     }
   }, [messages.length, isStreaming, lastMessageContent]);
 
+  // Buffered rendering for readable streaming
+  const bufferRef = useRef("");
+  const renderingRef = useRef(false);
+  const assistantIdRef = useRef<string | null>(null);
+  const assistantContentRef = useRef("");
+  const streamDoneRef = useRef(false);
+
+  const flushBuffer = useCallback(() => {
+    if (renderingRef.current) return;
+    renderingRef.current = true;
+
+    const tick = () => {
+      if (bufferRef.current.length === 0) {
+        renderingRef.current = false;
+        if (streamDoneRef.current) {
+          // Parse severity after done
+          const severity = parseSeverityFromResponse(assistantContentRef.current);
+          if (assistantIdRef.current) {
+            updateMessage(assistantIdRef.current, { severity });
+            if (severity === "emergency") {
+              const guidance = getFirstAidGuidance("");
+              triggerEmergency("", guidance);
+            }
+          }
+          setIsStreaming(false);
+          streamDoneRef.current = false;
+        }
+        return;
+      }
+
+      // Render a few characters at a time for a readable pace
+      const chunkSize = Math.max(1, Math.min(3, bufferRef.current.length));
+      const chars = bufferRef.current.slice(0, chunkSize);
+      bufferRef.current = bufferRef.current.slice(chunkSize);
+      assistantContentRef.current += chars;
+
+      if (!assistantIdRef.current) {
+        assistantIdRef.current = addMessage({ role: "assistant", content: assistantContentRef.current });
+      } else {
+        updateMessage(assistantIdRef.current, { content: assistantContentRef.current });
+      }
+
+      setTimeout(tick, 18);
+    };
+
+    tick();
+  }, [addMessage, updateMessage, setIsStreaming, triggerEmergency]);
+
   const handleSend = async (text: string) => {
     // Tier 1: Client-side keyword detection
     if (detectEmergencyKeywords(text)) {
@@ -40,8 +88,11 @@ const Chat = () => {
     addMessage({ role: "user", content: text });
     setIsStreaming(true);
 
-    let assistantId: string | null = null;
-    let assistantContent = "";
+    // Reset refs
+    assistantIdRef.current = null;
+    assistantContentRef.current = "";
+    bufferRef.current = "";
+    streamDoneRef.current = false;
 
     const chatMessages = [...messages, { role: "user" as const, content: text }].map((m) => ({
       role: m.role,
@@ -53,30 +104,19 @@ const Chat = () => {
       model,
       ageGroup,
       onDelta: (chunk) => {
-        assistantContent += chunk;
-        if (!assistantId) {
-          assistantId = addMessage({ role: "assistant", content: assistantContent });
-        } else {
-          updateMessage(assistantId, { content: assistantContent });
-        }
+        bufferRef.current += chunk;
+        flushBuffer();
       },
       onDone: () => {
-        // Parse severity from completed response
-        if (assistantId) {
-          const severity = parseSeverityFromResponse(assistantContent);
-          updateMessage(assistantId, { severity });
-          if (severity === "emergency") {
-            const guidance = getFirstAidGuidance(text);
-            triggerEmergency(text, guidance);
-          }
-        }
-        setIsStreaming(false);
+        streamDoneRef.current = true;
+        flushBuffer();
       },
       onError: (err) => {
-        if (!assistantId) {
+        bufferRef.current = "";
+        if (!assistantIdRef.current) {
           addMessage({ role: "assistant", content: `I'm sorry, I encountered an error: ${err}` });
         } else {
-          updateMessage(assistantId, { content: `I'm sorry, I encountered an error: ${err}` });
+          updateMessage(assistantIdRef.current, { content: `I'm sorry, I encountered an error: ${err}` });
         }
         setIsStreaming(false);
       },
