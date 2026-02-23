@@ -22,9 +22,13 @@ const Chat = () => {
     ageGroup, model, triggerEmergency,
   } = useAppStore();
 
+  const lastMessageContent = messages.length > 0 ? messages[messages.length - 1]?.content : "";
+
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, isStreaming]);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages.length, isStreaming, lastMessageContent]);
 
   const handleSend = async (text: string) => {
     // Tier 1: Client-side keyword detection
@@ -113,9 +117,7 @@ const Chat = () => {
         {messages.map((msg) => (
           <ChatMessage key={msg.id} message={msg} />
         ))}
-        {isStreaming && !messages.some((m) => m.role === "assistant" && m.id === messages[messages.length - 1]?.id) && (
-          <TypingIndicator />
-        )}
+        {isStreaming && <TypingIndicator />}
       </div>
 
       {/* Input */}
