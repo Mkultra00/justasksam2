@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, MessageCircle, ArrowRight, ChevronDown } from "lucide-react";
+import { Shield, MessageCircle, ArrowRight, ChevronDown, AlertTriangle } from "lucide-react";
 import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -85,15 +85,26 @@ const Index = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.35, duration: 0.4 }}
         >
-          <Button
-            size="lg"
-            onClick={handleStartChat}
-            className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-shadow gap-2"
-          >
-            <MessageCircle className="w-5 h-5" />
-            Start a Conversation
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+            <Button
+              size="lg"
+              onClick={handleStartChat}
+              className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-shadow gap-2"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Start a Conversation
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="destructive"
+              onClick={() => navigate("/chat", { state: { emergency: true } })}
+              className="rounded-full px-8 py-6 text-base font-bold shadow-lg hover:shadow-xl transition-shadow gap-2 bg-emergency text-emergency-foreground hover:bg-emergency/90"
+            >
+              <AlertTriangle className="w-5 h-5" />
+              Emergency
+            </Button>
+          </div>
         </motion.div>
 
         {/* Concern Categories */}
