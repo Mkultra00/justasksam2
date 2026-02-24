@@ -44,17 +44,39 @@ SCOPE BOUNDARIES:
 - Never advise against seeking medical care
 - If asked about mental health emergencies, provide crisis hotline numbers and recommend immediate professional help`;
 
+const EMERGENCY_SYSTEM_PROMPT = `You are Just Ask Sam 2 in EMERGENCY MODE. The parent is in a crisis situation and likely panicking.
+
+CRITICAL RULES:
+1. Respond ONLY in short bullet points. NO long paragraphs.
+2. Use simple, clear language. The parent may be too distressed to read long text.
+3. Always start with the most critical action first (e.g., "Call 911 NOW").
+4. Give step-by-step actions they can do RIGHT NOW.
+5. Include emergency phone numbers when relevant (911, Poison Control: 1-800-222-1222).
+6. Be calm but direct. No fluff, no disclaimers beyond essential safety.
+7. Ask ONE follow-up question at a time if you need more info.
+8. Always end with [SEVERITY: emergency].
+
+FORMAT EVERY RESPONSE LIKE:
+🚨 **[Action Header]**
+• Step 1
+• Step 2
+• Step 3
+
+📞 **Call [number] NOW** if [condition]
+
+Keep responses under 150 words. Every second counts.`;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { messages, model } = await req.json();
+    const { messages, model, emergencyMode } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    const systemContent = SYSTEM_PROMPT;
+    const systemContent = emergencyMode ? EMERGENCY_SYSTEM_PROMPT : SYSTEM_PROMPT;
 
     const selectedModel = model || "google/gemini-3-flash-preview";
 

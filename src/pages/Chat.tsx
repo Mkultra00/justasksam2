@@ -15,7 +15,9 @@ const Chat = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const prefill = (location.state as any)?.prefill as string | undefined;
+  const isEmergencyMode = (location.state as any)?.emergency as boolean | undefined;
   const scrollRef = useRef<HTMLDivElement>(null);
+  const emergencyInitRef = useRef(false);
 
   const {
     messages, isStreaming, addMessage, updateMessage, clearMessages, setIsStreaming,
@@ -29,6 +31,18 @@ const Chat = () => {
       scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
   }, [messages.length, isStreaming, lastMessageContent]);
+
+  // Auto-start emergency conversation
+  useEffect(() => {
+    if (isEmergencyMode && !emergencyInitRef.current && messages.length === 0) {
+      emergencyInitRef.current = true;
+      // Add the AI's initial emergency question
+      addMessage({
+        role: "assistant",
+        content: "🚨 **I'm here to help. Stay calm.**\n\nWhat is the emergency? Tell me:\n- **What happened?**\n- **How old is the child?**\n- **Are they conscious and breathing?**",
+      });
+    }
+  }, [isEmergencyMode, messages.length, addMessage]);
 
   // Buffered rendering for readable streaming
   const bufferRef = useRef("");
@@ -103,6 +117,7 @@ const Chat = () => {
       messages: chatMessages,
       model,
       ageGroup,
+      emergencyMode: !!isEmergencyMode,
       onDelta: (chunk) => {
         bufferRef.current += chunk;
         flushBuffer();
