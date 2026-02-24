@@ -26,6 +26,12 @@ const Chat = () => {
 
   const lastMessageContent = messages.length > 0 ? messages[messages.length - 1]?.content : "";
 
+  // Clear messages when starting a new chat session
+  useEffect(() => {
+    clearMessages();
+    emergencyInitRef.current = false;
+  }, [clearMessages]);
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
