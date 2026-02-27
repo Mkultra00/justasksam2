@@ -45,7 +45,7 @@ const Chat = () => {
       // Add the AI's initial emergency question
       addMessage({
         role: "assistant",
-        content: "🚨 **I'm here to help. Stay calm.**\n\nWhat is the emergency? Tell me:\n- **What happened?**\n- **How old is the child?**\n- **Are they conscious and breathing?**",
+        content: "🚨 **I'm here to help. Stay calm.**\n\nTell me what's going on — what happened?",
       });
     }
   }, [isEmergencyMode, messages.length, addMessage]);
