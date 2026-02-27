@@ -171,8 +171,8 @@ const Chat = () => {
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
         {messages.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p className="text-sm">Describe your child's symptoms or concerns.</p>
-            <p className="text-xs mt-1">I'll provide guidance and let you know if you should see a doctor.</p>
+            <p className="text-sm">What's on your mind? Describe what you're going through.</p>
+            <p className="text-xs mt-1">I'll help you figure out next steps and when to get professional help.</p>
           </div>
         )}
         {messages.map((msg) => (
