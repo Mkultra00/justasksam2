@@ -43,7 +43,7 @@ const Index = () => {
               <motion.img
                 src={samAvatar}
                 alt="Sam avatar"
-                className="w-full h-full rounded-full shadow-lg relative z-10 object-cover"
+                className="w-full h-full rounded-full shadow-lg relative z-10 object-cover object-[center_20%]"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
