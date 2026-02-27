@@ -23,19 +23,6 @@ export interface ConcernCategory {
 
 export const CONCERN_CATEGORIES: ConcernCategory[] = [
   {
-    id: "physical",
-    label: "Physical Health",
-    emoji: "🩺",
-    items: [
-      { id: "headaches", label: "Headaches & Migraines", emoji: "🤕", prompt: "My teen has been getting frequent headaches. What could be causing them?" },
-      { id: "fatigue", label: "Fatigue & Low Energy", emoji: "😴", prompt: "My teen is always tired even when sleeping enough. What should I do?" },
-      { id: "stomach", label: "Stomach & Digestion", emoji: "🤢", prompt: "My teen has been having stomach issues. What might be going on?" },
-      { id: "skin", label: "Skin & Acne", emoji: "✨", prompt: "My teen is dealing with skin problems. What can help?" },
-      { id: "pain", label: "Body Aches & Pain", emoji: "💪", prompt: "My teen has been complaining of unexplained body pain. Should I be worried?" },
-      { id: "sexual-health", label: "Sexual Health", emoji: "❤️", prompt: "I need guidance on how to approach sexual health topics with my teen." },
-    ],
-  },
-  {
     id: "mental",
     label: "Mental Health",
     emoji: "🧠",
@@ -44,6 +31,8 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
       { id: "depression", label: "Low Mood & Depression", emoji: "😞", prompt: "My teen has been withdrawn and down. What should I look out for?" },
       { id: "burnout", label: "Burnout", emoji: "🔥", prompt: "I think my teen is burned out from school and activities. How can I support them?" },
       { id: "selfesteem", label: "Self-Esteem & Identity", emoji: "💛", prompt: "My teen is struggling with self-image and confidence. How can I help?" },
+      { id: "psychosomatic", label: "Stress-Related Physical Symptoms", emoji: "🤕", prompt: "My teen keeps complaining of headaches and stomach aches but doctors can't find anything. Could it be stress-related?" },
+      { id: "eating", label: "Eating & Body Image", emoji: "🍽️", prompt: "I'm concerned my teen may have an unhealthy relationship with food and body image." },
     ],
   },
   {
