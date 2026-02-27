@@ -27,7 +27,7 @@ const Index = () => {
       <div className="bg-primary/5 border-b border-primary/10 px-4 py-3">
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
           <Shield className="inline-block w-4 h-4 mr-1 -mt-0.5 text-primary" />
-          Just Ask Sam 2 is <strong>not</strong> a substitute for professional medical advice. Always consult your pediatrician.
+          Just Ask Sam 2 is for <strong>informational purposes only</strong> and does not provide clinical treatment, medical diagnoses, or establish a doctor-patient relationship. Always consult a qualified healthcare professional for medical advice. If this is an emergency, call <strong>911</strong> immediately.
         </p>
       </div>
 
