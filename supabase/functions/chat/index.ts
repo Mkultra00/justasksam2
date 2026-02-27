@@ -91,11 +91,16 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, model, emergencyMode } = await req.json();
+    const { messages, model, emergencyMode, memoryContext } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    const systemContent = emergencyMode ? EMERGENCY_SYSTEM_PROMPT : SYSTEM_PROMPT;
+    let systemContent = emergencyMode ? EMERGENCY_SYSTEM_PROMPT : SYSTEM_PROMPT;
+
+    // Inject persistent memory context if available
+    if (memoryContext && typeof memoryContext === "string" && memoryContext.trim()) {
+      systemContent += `\n\nPERSISTENT MEMORY (from previous sessions with this guardian):\nUse this context to personalize your responses. At the start of a returning session, briefly acknowledge what you remember and ask if anything has changed.\n\n${memoryContext}`;
+    }
 
     const selectedModel = model || "google/gemini-3-flash-preview";
 
