@@ -70,8 +70,8 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
-            Your calm, judgment-free guide for navigating health, mental wellness, and life's big questions.
-            Get real guidance — and know when to reach out for help.
+            Your calm, trusted guide for supporting your teen or young adult's health, wellness, and life challenges.
+            Get guidance — and know when to seek professional help.
           </p>
         </motion.div>
       </header>

@@ -27,12 +27,12 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Physical Health",
     emoji: "🩺",
     items: [
-      { id: "headaches", label: "Headaches & Migraines", emoji: "🤕", prompt: "I've been getting frequent headaches. What could be causing them?" },
-      { id: "fatigue", label: "Fatigue & Low Energy", emoji: "😴", prompt: "I'm always tired even when I sleep enough. What should I do?" },
-      { id: "stomach", label: "Stomach & Digestion", emoji: "🤢", prompt: "I've been having stomach issues. What might be going on?" },
-      { id: "skin", label: "Skin & Acne", emoji: "✨", prompt: "I'm dealing with skin problems. What can help?" },
-      { id: "pain", label: "Body Aches & Pain", emoji: "💪", prompt: "I've been having unexplained body pain. Should I be worried?" },
-      { id: "sexual-health", label: "Sexual Health", emoji: "❤️", prompt: "I have questions about sexual health. Can you help?" },
+      { id: "headaches", label: "Headaches & Migraines", emoji: "🤕", prompt: "My teen has been getting frequent headaches. What could be causing them?" },
+      { id: "fatigue", label: "Fatigue & Low Energy", emoji: "😴", prompt: "My teen is always tired even when sleeping enough. What should I do?" },
+      { id: "stomach", label: "Stomach & Digestion", emoji: "🤢", prompt: "My teen has been having stomach issues. What might be going on?" },
+      { id: "skin", label: "Skin & Acne", emoji: "✨", prompt: "My teen is dealing with skin problems. What can help?" },
+      { id: "pain", label: "Body Aches & Pain", emoji: "💪", prompt: "My teen has been complaining of unexplained body pain. Should I be worried?" },
+      { id: "sexual-health", label: "Sexual Health", emoji: "❤️", prompt: "I need guidance on how to approach sexual health topics with my teen." },
     ],
   },
   {
@@ -40,10 +40,10 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Mental Health",
     emoji: "🧠",
     items: [
-      { id: "anxiety", label: "Anxiety & Stress", emoji: "😰", prompt: "I've been feeling really anxious lately. How can I manage it?" },
-      { id: "depression", label: "Low Mood & Depression", emoji: "😞", prompt: "I've been feeling down for a while. What should I do?" },
-      { id: "burnout", label: "Burnout", emoji: "🔥", prompt: "I think I'm burned out. How do I recover?" },
-      { id: "selfesteem", label: "Self-Esteem & Identity", emoji: "💛", prompt: "I've been struggling with my self-image. How can I feel better about myself?" },
+      { id: "anxiety", label: "Anxiety & Stress", emoji: "😰", prompt: "My teen seems really anxious lately. How can I help them?" },
+      { id: "depression", label: "Low Mood & Depression", emoji: "😞", prompt: "My teen has been withdrawn and down. What should I look out for?" },
+      { id: "burnout", label: "Burnout", emoji: "🔥", prompt: "I think my teen is burned out from school and activities. How can I support them?" },
+      { id: "selfesteem", label: "Self-Esteem & Identity", emoji: "💛", prompt: "My teen is struggling with self-image and confidence. How can I help?" },
     ],
   },
   {
@@ -51,10 +51,10 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Relationships",
     emoji: "🤝",
     items: [
-      { id: "family", label: "Family Conflict", emoji: "🏠", prompt: "I'm having conflicts with my family. How can I handle it?" },
-      { id: "friendships", label: "Friendships", emoji: "👫", prompt: "I'm struggling with friendships. What should I do?" },
-      { id: "romantic", label: "Romantic Relationships", emoji: "💕", prompt: "I need guidance about a romantic relationship issue." },
-      { id: "loneliness", label: "Loneliness & Isolation", emoji: "🫂", prompt: "I've been feeling really lonely. How can I cope?" },
+      { id: "family", label: "Family Conflict", emoji: "🏠", prompt: "I'm having conflicts with my teen. How can I improve our communication?" },
+      { id: "friendships", label: "Friendships", emoji: "👫", prompt: "My teen is struggling with friendships. What should I do?" },
+      { id: "romantic", label: "Romantic Relationships", emoji: "💕", prompt: "My teen is in a relationship and I have concerns. How should I approach this?" },
+      { id: "loneliness", label: "Loneliness & Isolation", emoji: "🫂", prompt: "My teen seems isolated and lonely. How can I help them connect?" },
     ],
   },
   {
@@ -62,10 +62,10 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Lifestyle & Habits",
     emoji: "🌿",
     items: [
-      { id: "sleep", label: "Sleep Problems", emoji: "🌙", prompt: "I can't sleep well. What can I do to improve my sleep?" },
-      { id: "nutrition", label: "Nutrition & Diet", emoji: "🥗", prompt: "I want to eat healthier but don't know where to start." },
-      { id: "exercise", label: "Exercise & Fitness", emoji: "🏃", prompt: "I want to be more active. How do I start?" },
-      { id: "substances", label: "Substance Use", emoji: "🚫", prompt: "I have concerns about substance use. Can we talk about it?" },
+      { id: "sleep", label: "Sleep Problems", emoji: "🌙", prompt: "My teen has terrible sleep habits. How can I help them improve?" },
+      { id: "nutrition", label: "Nutrition & Diet", emoji: "🥗", prompt: "I'm concerned about my teen's eating habits. What should I know?" },
+      { id: "exercise", label: "Exercise & Fitness", emoji: "🏃", prompt: "How can I encourage my teen to be more physically active?" },
+      { id: "substances", label: "Substance Use", emoji: "🚫", prompt: "I'm worried my teen may be using substances. How should I handle this?" },
     ],
   },
   {
@@ -73,10 +73,10 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "School & Career",
     emoji: "📚",
     items: [
-      { id: "academic", label: "Academic Pressure", emoji: "📝", prompt: "I'm overwhelmed by school pressure. How do I cope?" },
-      { id: "career", label: "Career Uncertainty", emoji: "🧭", prompt: "I don't know what I want to do with my life. Can you help me think through it?" },
-      { id: "focus", label: "Focus & Motivation", emoji: "🎯", prompt: "I can't focus or stay motivated. What's wrong with me?" },
-      { id: "finances", label: "Financial Stress", emoji: "💸", prompt: "I'm stressed about money. How can I manage it?" },
+      { id: "academic", label: "Academic Pressure", emoji: "📝", prompt: "My teen is overwhelmed by school pressure. How can I support them?" },
+      { id: "career", label: "Career Uncertainty", emoji: "🧭", prompt: "My teen doesn't know what they want to do after school. How can I help?" },
+      { id: "focus", label: "Focus & Motivation", emoji: "🎯", prompt: "My teen can't focus or stay motivated. Could something be wrong?" },
+      { id: "finances", label: "Financial Literacy", emoji: "💸", prompt: "How can I teach my teen about money management?" },
     ],
   },
   {
@@ -84,10 +84,10 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Safety & Crisis",
     emoji: "🛡️",
     items: [
-      { id: "selfharm", label: "Self-Harm Thoughts", emoji: "🆘", prompt: "I've been having thoughts of hurting myself. I need help." },
-      { id: "abuse", label: "Abuse & Unsafe Situations", emoji: "⚠️", prompt: "I'm in an unsafe situation. What are my options?" },
-      { id: "online-safety", label: "Online Safety", emoji: "🔒", prompt: "I'm dealing with something concerning online. What should I do?" },
-      { id: "crisis", label: "Crisis Resources", emoji: "📞", prompt: "I need to know what crisis resources are available to me." },
+      { id: "selfharm", label: "Self-Harm Concerns", emoji: "🆘", prompt: "I'm worried my teen may be self-harming. What should I do?" },
+      { id: "abuse", label: "Abuse & Unsafe Situations", emoji: "⚠️", prompt: "I'm concerned my teen may be in an unsafe situation. What are my options?" },
+      { id: "online-safety", label: "Online Safety", emoji: "🔒", prompt: "I'm worried about my teen's online activity. How can I keep them safe?" },
+      { id: "crisis", label: "Crisis Resources", emoji: "📞", prompt: "What crisis resources are available for teens and young adults?" },
     ],
   },
 ];
