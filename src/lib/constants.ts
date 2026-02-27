@@ -55,6 +55,7 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
       { id: "nutrition", label: "Nutrition & Diet", emoji: "🥗", prompt: "I'm concerned about my teen's eating habits. What should I know?" },
       { id: "exercise", label: "Exercise & Fitness", emoji: "🏃", prompt: "How can I encourage my teen to be more physically active?" },
       { id: "substances", label: "Substance Use", emoji: "🚫", prompt: "I'm worried my teen may be using substances. How should I handle this?" },
+      { id: "tech-addiction", label: "Technology Addiction", emoji: "📱", prompt: "My teen seems addicted to their phone and screens. It's affecting their daily life. How can I help?" },
     ],
   },
   {
@@ -66,6 +67,17 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
       { id: "career", label: "Career Uncertainty", emoji: "🧭", prompt: "My teen doesn't know what they want to do after school. How can I help?" },
       { id: "focus", label: "Focus & Motivation", emoji: "🎯", prompt: "My teen can't focus or stay motivated. Could something be wrong?" },
       { id: "finances", label: "Financial Literacy", emoji: "💸", prompt: "How can I teach my teen about money management?" },
+    ],
+  },
+  {
+    id: "identity",
+    label: "Identity & Growth",
+    emoji: "🌈",
+    items: [
+      { id: "gender-identity", label: "Gender Identity", emoji: "🏳️‍🌈", prompt: "My teen is exploring their gender identity. How can I be supportive and what should I know?" },
+      { id: "sexuality", label: "Sexual Orientation", emoji: "💜", prompt: "My teen has come out or is questioning their sexuality. How can I best support them?" },
+      { id: "cultural-identity", label: "Cultural Identity", emoji: "🌍", prompt: "My teen is struggling with their cultural identity. How can I help them navigate this?" },
+      { id: "selfesteem-identity", label: "Finding Their Path", emoji: "🧭", prompt: "My teen seems lost and unsure of who they are. How can I help them build a sense of identity?" },
     ],
   },
   {
