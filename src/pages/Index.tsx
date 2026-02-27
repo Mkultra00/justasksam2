@@ -73,8 +73,23 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
-            Your calm, trusted guide for supporting your teen or young adult's health, wellness, and life challenges.
-            Get guidance — and know when to seek professional help.
+            Your calm, trusted guide for supporting your teen or young adult's emotional health, wellness, and life challenges.
+          </p>
+        </motion.div>
+
+        {/* Mission Statement */}
+        <motion.div
+          className="max-w-2xl mx-auto mt-8 p-6 rounded-2xl border border-primary/15 bg-primary/5"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          <h2 className="text-lg font-serif font-semibold text-foreground mb-2 text-center">Our Mission</h2>
+          <p className="text-sm text-muted-foreground leading-relaxed text-center">
+            We support families with teens and young adults navigating depression, anxiety, substance abuse, technology addiction, gender identity, and other life challenges. Our mission is to improve social and emotional health through the <strong className="text-foreground">Power of the Peer</strong> — combining lived experience with evidence-based guidance so no family feels alone.
+          </p>
+          <p className="text-xs text-muted-foreground/70 text-center mt-3 italic">
+            Inspired by <a href="https://isleworthprivateservices.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary transition-colors">Isleworth Private Client Services</a>
           </p>
         </motion.div>
       </header>
