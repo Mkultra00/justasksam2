@@ -10,6 +10,7 @@ import EmergencyAlert from "@/components/EmergencyAlert";
 import { useAppStore } from "@/lib/store";
 import { streamChat } from "@/lib/chat";
 import { detectEmergencyKeywords, getFirstAidGuidance, parseSeverityFromResponse } from "@/lib/safety";
+import { getMemoryContext } from "@/lib/memory";
 
 const Chat = () => {
   const location = useLocation();
@@ -21,16 +22,22 @@ const Chat = () => {
 
   const {
     messages, isStreaming, addMessage, updateMessage, clearMessages, setIsStreaming,
-    ageGroup, model, triggerEmergency,
+    ageGroup, model, triggerEmergency, guardianId, memoryContext, setMemoryContext,
   } = useAppStore();
 
   const lastMessageContent = messages.length > 0 ? messages[messages.length - 1]?.content : "";
 
-  // Clear messages when starting a new chat session
+  // Clear messages and load memory when starting a new chat session
   useEffect(() => {
     clearMessages();
     emergencyInitRef.current = false;
-  }, [clearMessages]);
+    // Load memory context for this guardian
+    if (guardianId) {
+      getMemoryContext(guardianId).then((ctx) => {
+        setMemoryContext(ctx);
+      }).catch(console.error);
+    }
+  }, [clearMessages, guardianId, setMemoryContext]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -124,6 +131,7 @@ const Chat = () => {
       model,
       ageGroup,
       emergencyMode: !!isEmergencyMode,
+      memoryContext: memoryContext || undefined,
       onDelta: (chunk) => {
         bufferRef.current += chunk;
         flushBuffer();
@@ -143,6 +151,25 @@ const Chat = () => {
       },
     });
   };
+
+  // Save memory when leaving the chat (if guardian is identified and messages exist)
+  const saveMemoryOnExit = useCallback(() => {
+    if (!guardianId || messages.length < 2) return;
+    const conversationHistory = messages.map((m) => ({ role: m.role, content: m.content }));
+    // Fire and forget
+    fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/save-memory`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      },
+      body: JSON.stringify({ guardianId, conversationHistory }),
+    }).catch(console.error);
+  }, [guardianId, messages]);
+
+  useEffect(() => {
+    return () => { saveMemoryOnExit(); };
+  }, [saveMemoryOnExit]);
 
   return (
     <div className="flex flex-col h-screen bg-background">

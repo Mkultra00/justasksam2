@@ -18,6 +18,15 @@ interface AppState {
   clearMessages: () => void;
   setIsStreaming: (v: boolean) => void;
 
+  // Guardian (PIN-based identity)
+  guardianId: string | null;
+  guardianPin: string | null;
+  guardianName: string | null;
+  memoryContext: string;
+  setGuardian: (id: string | null, pin: string | null, name: string | null) => void;
+  setMemoryContext: (ctx: string) => void;
+  logoutGuardian: () => void;
+
   // Settings
   ageGroup: AgeGroup | null;
   setAgeGroup: (ag: AgeGroup | null) => void;
@@ -52,6 +61,14 @@ export const useAppStore = create<AppState>((set) => ({
     })),
   clearMessages: () => set({ messages: [] }),
   setIsStreaming: (v) => set({ isStreaming: v }),
+
+  guardianId: null,
+  guardianPin: null,
+  guardianName: null,
+  memoryContext: "",
+  setGuardian: (id, pin, name) => set({ guardianId: id, guardianPin: pin, guardianName: name }),
+  setMemoryContext: (ctx) => set({ memoryContext: ctx }),
+  logoutGuardian: () => set({ guardianId: null, guardianPin: null, guardianName: null, memoryContext: "" }),
 
   ageGroup: null,
   setAgeGroup: (ag) => set({ ageGroup: ag }),

@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, MessageCircle, ArrowRight, ChevronDown, AlertTriangle } from "lucide-react";
+import { Shield, MessageCircle, ArrowRight, ChevronDown, AlertTriangle, KeyRound, LogOut } from "lucide-react";
 import samAvatar from "@/assets/sam-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CONCERN_CATEGORIES } from "@/lib/constants";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "@/lib/store";
+import PinAccess from "@/components/PinAccess";
 
 const Index = () => {
   const navigate = useNavigate();
   const [openCategory, setOpenCategory] = useState<string | null>(null);
   const [customInput, setCustomInput] = useState("");
+  const { guardianId, guardianPin, guardianName, logoutGuardian } = useAppStore();
 
   const handleScenario = (prompt: string) => {
     // Navigate to chat with pre-filled prompt
@@ -78,36 +81,67 @@ const Index = () => {
 
       <main className="px-4 pb-16 max-w-3xl mx-auto space-y-10">
 
-        {/* Start Chat Button */}
-        <motion.div
-          className="flex justify-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.35, duration: 0.4 }}
-        >
-        <div className="flex flex-col sm:flex-row items-center gap-3">
-            <Button
-              size="lg"
-              onClick={handleStartChat}
-              className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-shadow gap-2"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Start a Conversation
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="destructive"
-              onClick={() => navigate("/chat", { state: { emergency: true } })}
-              className="rounded-full px-8 py-6 text-base font-bold shadow-lg hover:shadow-xl transition-shadow gap-2 bg-emergency text-emergency-foreground hover:bg-emergency/90"
-            >
-              <AlertTriangle className="w-5 h-5" />
-              Emergency
-            </Button>
-          </div>
-        </motion.div>
+        {/* PIN Access Section */}
+        {guardianId === null ? (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
+            <PinAccess />
+          </motion.div>
+        ) : (
+          <>
+            {/* Guardian status bar */}
+            {guardianPin && (
+              <motion.div
+                className="flex items-center justify-center gap-3 text-sm text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <KeyRound className="w-4 h-4 text-primary" />
+                <span>Code: <span className="font-mono font-medium text-foreground">{guardianPin}</span></span>
+                {guardianName && <span>· {guardianName}</span>}
+                <button onClick={logoutGuardian} className="text-muted-foreground hover:text-foreground transition-colors">
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </motion.div>
+            )}
 
-        {/* Concern Categories */}
+            {/* Start Chat Button */}
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.35, duration: 0.4 }}
+            >
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <Button
+                  size="lg"
+                  onClick={handleStartChat}
+                  className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-shadow gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Start a Conversation
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="destructive"
+                  onClick={() => navigate("/chat", { state: { emergency: true } })}
+                  className="rounded-full px-8 py-6 text-base font-bold shadow-lg hover:shadow-xl transition-shadow gap-2 bg-emergency text-emergency-foreground hover:bg-emergency/90"
+                >
+                  <AlertTriangle className="w-5 h-5" />
+                  Emergency
+                </Button>
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* Concern Categories - only show when guardian is identified */}
+        {guardianId !== null && (
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -167,7 +201,7 @@ const Index = () => {
                     e.preventDefault();
                     if (customInput.trim()) {
                       const catLabel = CONCERN_CATEGORIES.find((c) => c.id === openCategory)?.label || "";
-                      handleScenario(`I have a ${catLabel.toLowerCase()} concern about my child: ${customInput.trim()}`);
+                      handleScenario(`I have a ${catLabel.toLowerCase()} concern about my teen: ${customInput.trim()}`);
                       setCustomInput("");
                     }
                   }}
@@ -187,6 +221,7 @@ const Index = () => {
             )}
           </AnimatePresence>
         </motion.section>
+        )}
 
         {/* Trust Indicators */}
         <motion.section
@@ -200,7 +235,7 @@ const Index = () => {
               <Shield className="w-3 h-3" /> Safety-First Design
             </Badge>
             <Badge variant="secondary" className="text-xs font-normal gap-1">
-              🔒 No Data Stored
+              🔒 PIN-Secured Memory
             </Badge>
             <Badge variant="secondary" className="text-xs font-normal gap-1">
               🩺 Evidence-Based Guidance

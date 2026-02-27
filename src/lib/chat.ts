@@ -5,12 +5,13 @@ interface StreamChatParams {
   model: string;
   ageGroup: string | null;
   emergencyMode?: boolean;
+  memoryContext?: string;
   onDelta: (text: string) => void;
   onDone: () => void;
   onError: (err: string) => void;
 }
 
-export async function streamChat({ messages, model, ageGroup, emergencyMode, onDelta, onDone, onError }: StreamChatParams) {
+export async function streamChat({ messages, model, ageGroup, emergencyMode, memoryContext, onDelta, onDone, onError }: StreamChatParams) {
   try {
     const resp = await fetch(CHAT_URL, {
       method: "POST",
@@ -18,7 +19,7 @@ export async function streamChat({ messages, model, ageGroup, emergencyMode, onD
         "Content-Type": "application/json",
         Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
-      body: JSON.stringify({ messages, model, ageGroup, emergencyMode }),
+      body: JSON.stringify({ messages, model, ageGroup, emergencyMode, memoryContext }),
     });
 
     if (!resp.ok) {
