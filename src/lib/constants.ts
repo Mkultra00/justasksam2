@@ -1,10 +1,10 @@
-export type AgeGroup = "newborn" | "infant" | "toddler" | "child";
+export type AgeGroup = "young-teen" | "older-teen" | "young-adult" | "late-twenties";
 
 export const AGE_GROUPS: { id: AgeGroup; label: string; range: string; emoji: string }[] = [
-  { id: "newborn", label: "Newborn", range: "0–3 months", emoji: "👶" },
-  { id: "infant", label: "Infant", range: "3–12 months", emoji: "🍼" },
-  { id: "toddler", label: "Toddler", range: "1–3 years", emoji: "🧸" },
-  { id: "child", label: "Child", range: "3–12 years", emoji: "🎒" },
+  { id: "young-teen", label: "Young Teen", range: "12–14", emoji: "🎧" },
+  { id: "older-teen", label: "Older Teen", range: "15–19", emoji: "🎓" },
+  { id: "young-adult", label: "Young Adult", range: "21–25", emoji: "🌱" },
+  { id: "late-twenties", label: "Late Twenties", range: "26–30", emoji: "💼" },
 ];
 
 export interface ConcernItem {
@@ -23,27 +23,16 @@ export interface ConcernCategory {
 
 export const CONCERN_CATEGORIES: ConcernCategory[] = [
   {
-    id: "medical",
-    label: "Medical",
+    id: "physical",
+    label: "Physical Health",
     emoji: "🩺",
     items: [
-      { id: "fever", label: "Fever", emoji: "🌡️", prompt: "My child has a fever. What should I do?" },
-      { id: "rashes", label: "Rashes", emoji: "🔴", prompt: "My child has developed a rash. What could it be?" },
-      { id: "cough", label: "Cough & Cold", emoji: "🤧", prompt: "My child has a cough and cold symptoms." },
-      { id: "teething", label: "Teething", emoji: "🦷", prompt: "My child seems to be teething and is very fussy." },
-      { id: "stomach", label: "Stomach Issues", emoji: "🤢", prompt: "My child has stomach pain or vomiting. What should I look out for?" },
-      { id: "allergies", label: "Allergies", emoji: "🤧", prompt: "I think my child might have allergies. What are the signs?" },
-    ],
-  },
-  {
-    id: "daily",
-    label: "Daily Care",
-    emoji: "🍼",
-    items: [
-      { id: "feeding", label: "Feeding & Nutrition", emoji: "🥄", prompt: "I have concerns about my child's feeding and nutrition." },
-      { id: "sleep", label: "Sleep Issues", emoji: "😴", prompt: "My child is having trouble sleeping. Any guidance?" },
-      { id: "potty", label: "Potty Training", emoji: "🚽", prompt: "I need help with potty training. Any tips?" },
-      { id: "hygiene", label: "Hygiene & Bathing", emoji: "🛁", prompt: "What's the best hygiene routine for my child?" },
+      { id: "headaches", label: "Headaches & Migraines", emoji: "🤕", prompt: "I've been getting frequent headaches. What could be causing them?" },
+      { id: "fatigue", label: "Fatigue & Low Energy", emoji: "😴", prompt: "I'm always tired even when I sleep enough. What should I do?" },
+      { id: "stomach", label: "Stomach & Digestion", emoji: "🤢", prompt: "I've been having stomach issues. What might be going on?" },
+      { id: "skin", label: "Skin & Acne", emoji: "✨", prompt: "I'm dealing with skin problems. What can help?" },
+      { id: "pain", label: "Body Aches & Pain", emoji: "💪", prompt: "I've been having unexplained body pain. Should I be worried?" },
+      { id: "sexual-health", label: "Sexual Health", emoji: "❤️", prompt: "I have questions about sexual health. Can you help?" },
     ],
   },
   {
@@ -51,43 +40,54 @@ export const CONCERN_CATEGORIES: ConcernCategory[] = [
     label: "Mental Health",
     emoji: "🧠",
     items: [
-      { id: "anxiety", label: "Anxiety & Fears", emoji: "😰", prompt: "My child seems anxious or fearful. How can I help?" },
-      { id: "tantrums", label: "Tantrums & Meltdowns", emoji: "😤", prompt: "My child is having frequent tantrums. What's normal and when should I worry?" },
-      { id: "separation", label: "Separation Anxiety", emoji: "🥺", prompt: "My child has severe separation anxiety. What can I do?" },
-      { id: "selfesteem", label: "Self-Esteem", emoji: "💛", prompt: "How can I help boost my child's self-esteem and confidence?" },
+      { id: "anxiety", label: "Anxiety & Stress", emoji: "😰", prompt: "I've been feeling really anxious lately. How can I manage it?" },
+      { id: "depression", label: "Low Mood & Depression", emoji: "😞", prompt: "I've been feeling down for a while. What should I do?" },
+      { id: "burnout", label: "Burnout", emoji: "🔥", prompt: "I think I'm burned out. How do I recover?" },
+      { id: "selfesteem", label: "Self-Esteem & Identity", emoji: "💛", prompt: "I've been struggling with my self-image. How can I feel better about myself?" },
     ],
   },
   {
-    id: "social",
-    label: "Social & Behavior",
+    id: "relationships",
+    label: "Relationships",
     emoji: "🤝",
     items: [
-      { id: "bullying", label: "Bullying", emoji: "😢", prompt: "I think my child is being bullied. How should I handle this?" },
-      { id: "sharing", label: "Sharing & Taking Turns", emoji: "🤲", prompt: "My child struggles with sharing. How do I teach this?" },
-      { id: "shyness", label: "Shyness", emoji: "🫣", prompt: "My child is very shy around others. Should I be concerned?" },
-      { id: "screentime", label: "Screen Time", emoji: "📱", prompt: "How much screen time is okay for my child's age?" },
+      { id: "family", label: "Family Conflict", emoji: "🏠", prompt: "I'm having conflicts with my family. How can I handle it?" },
+      { id: "friendships", label: "Friendships", emoji: "👫", prompt: "I'm struggling with friendships. What should I do?" },
+      { id: "romantic", label: "Romantic Relationships", emoji: "💕", prompt: "I need guidance about a romantic relationship issue." },
+      { id: "loneliness", label: "Loneliness & Isolation", emoji: "🫂", prompt: "I've been feeling really lonely. How can I cope?" },
     ],
   },
   {
-    id: "school",
-    label: "School & Learning",
+    id: "lifestyle",
+    label: "Lifestyle & Habits",
+    emoji: "🌿",
+    items: [
+      { id: "sleep", label: "Sleep Problems", emoji: "🌙", prompt: "I can't sleep well. What can I do to improve my sleep?" },
+      { id: "nutrition", label: "Nutrition & Diet", emoji: "🥗", prompt: "I want to eat healthier but don't know where to start." },
+      { id: "exercise", label: "Exercise & Fitness", emoji: "🏃", prompt: "I want to be more active. How do I start?" },
+      { id: "substances", label: "Substance Use", emoji: "🚫", prompt: "I have concerns about substance use. Can we talk about it?" },
+    ],
+  },
+  {
+    id: "school-work",
+    label: "School & Career",
     emoji: "📚",
     items: [
-      { id: "readiness", label: "School Readiness", emoji: "🎒", prompt: "Is my child ready for school? What should they know?" },
-      { id: "homework", label: "Homework Struggles", emoji: "📝", prompt: "My child struggles with homework. How can I help?" },
-      { id: "focus", label: "Focus & Attention", emoji: "🎯", prompt: "My child has trouble focusing. Could it be ADHD or is it normal?" },
-      { id: "milestones", label: "Developmental Milestones", emoji: "📊", prompt: "Is my child hitting their developmental milestones on time?" },
+      { id: "academic", label: "Academic Pressure", emoji: "📝", prompt: "I'm overwhelmed by school pressure. How do I cope?" },
+      { id: "career", label: "Career Uncertainty", emoji: "🧭", prompt: "I don't know what I want to do with my life. Can you help me think through it?" },
+      { id: "focus", label: "Focus & Motivation", emoji: "🎯", prompt: "I can't focus or stay motivated. What's wrong with me?" },
+      { id: "finances", label: "Financial Stress", emoji: "💸", prompt: "I'm stressed about money. How can I manage it?" },
     ],
   },
   {
     id: "safety",
-    label: "Safety",
+    label: "Safety & Crisis",
     emoji: "🛡️",
     items: [
-      { id: "childproofing", label: "Childproofing", emoji: "🔒", prompt: "What should I childproof at home for my child's age?" },
-      { id: "firstaid", label: "First Aid Basics", emoji: "🩹", prompt: "What first aid basics should every parent know?" },
-      { id: "stranger", label: "Stranger Safety", emoji: "⚠️", prompt: "How do I teach my child about stranger safety?" },
-      { id: "water", label: "Water Safety", emoji: "🏊", prompt: "What water safety rules should my child know?" },
+      { id: "selfharm", label: "Self-Harm Thoughts", emoji: "🆘", prompt: "I've been having thoughts of hurting myself. I need help." },
+      { id: "abuse", label: "Abuse & Unsafe Situations", emoji: "⚠️", prompt: "I'm in an unsafe situation. What are my options?" },
+      { id: "online-safety", label: "Online Safety", emoji: "🔒", prompt: "I'm dealing with something concerning online. What should I do?" },
+      { id: "crisis", label: "Crisis Resources", emoji: "📞", prompt: "I need to know what crisis resources are available to me." },
     ],
   },
 ];

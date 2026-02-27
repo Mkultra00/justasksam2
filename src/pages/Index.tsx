@@ -27,7 +27,7 @@ const Index = () => {
       <div className="bg-primary/5 border-b border-primary/10 px-4 py-3">
         <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto">
           <Shield className="inline-block w-4 h-4 mr-1 -mt-0.5 text-primary" />
-          Just Ask Sam 2 is for <strong>informational purposes only</strong> and does not provide clinical treatment, medical diagnoses, or establish a doctor-patient relationship. Always consult a qualified healthcare professional for medical advice. If this is an emergency, call <strong>911</strong> immediately.
+          Just Ask Sam 2 is for <strong>informational purposes only</strong> and does not provide clinical treatment, medical diagnoses, or establish a patient relationship. Always consult a qualified healthcare professional. If this is an emergency, call <strong>911</strong> or <strong>988</strong> immediately.
         </p>
       </div>
 
@@ -70,8 +70,8 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed">
-            Your calm, trusted guide for navigating your child's health concerns. 
-            Get gentle guidance — and know when to call the doctor.
+            Your calm, judgment-free guide for navigating health, mental wellness, and life's big questions.
+            Get real guidance — and know when to reach out for help.
           </p>
         </motion.div>
       </header>
@@ -207,7 +207,7 @@ const Index = () => {
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground">
-            When in doubt, always call your doctor. Just Ask Sam 2 provides guidance, not diagnoses.
+            When in doubt, reach out to a professional. Just Ask Sam 2 provides guidance, not diagnoses.
           </p>
         </motion.section>
       </main>
