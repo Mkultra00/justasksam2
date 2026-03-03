@@ -153,23 +153,29 @@ const Chat = () => {
   };
 
   // Save memory when leaving the chat (if guardian is identified and messages exist)
-  const saveMemoryOnExit = useCallback(() => {
-    if (!guardianId || messages.length < 2) return;
-    const conversationHistory = messages.map((m) => ({ role: m.role, content: m.content }));
-    // Fire and forget
-    fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/save-memory`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-      },
-      body: JSON.stringify({ guardianId, conversationHistory }),
-    }).catch(console.error);
-  }, [guardianId, messages]);
+  // Use refs to avoid re-running the effect on every message change
+  const guardianIdRef = useRef(guardianId);
+  const messagesRef = useRef(messages);
+  guardianIdRef.current = guardianId;
+  messagesRef.current = messages;
 
   useEffect(() => {
-    return () => { saveMemoryOnExit(); };
-  }, [saveMemoryOnExit]);
+    return () => {
+      const gId = guardianIdRef.current;
+      const msgs = messagesRef.current;
+      if (!gId || msgs.length < 2) return;
+      const conversationHistory = msgs.map((m) => ({ role: m.role, content: m.content }));
+      fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/save-memory`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({ guardianId: gId, conversationHistory }),
+      }).catch(console.error);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col h-screen bg-background">
