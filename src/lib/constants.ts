@@ -122,11 +122,11 @@ export const SEVERITY_CONFIG: Record<Severity, { label: string; color: string; b
     advice: "This can likely be managed at home. Monitor symptoms.",
   },
   moderate: {
-    label: "Call Pediatrician",
+    label: "Call your child's Clinician and/or 988 and/or 911",
     color: "warning",
     bgClass: "bg-warning/10",
     textClass: "text-warning",
-    advice: "Consider calling your pediatrician for guidance.",
+    advice: "Consider calling your child's clinician for guidance.",
   },
   high: {
     label: "Seek Care Now",
