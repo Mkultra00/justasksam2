@@ -33,26 +33,15 @@ export async function findGuardianByPin(pin: string): Promise<Guardian | null> {
   return data;
 }
 
-// Create a new guardian with a unique PIN
-export async function createGuardian(displayName?: string): Promise<Guardian> {
-  let pin = generatePin();
-  let attempts = 0;
-  while (attempts < 10) {
-    const { data, error } = await supabase
-      .from("guardians")
-      .insert({ pin, display_name: displayName || null })
-      .select()
-      .single();
-    if (!error && data) return data;
-    if (error && error.code === "23505") {
-      // duplicate PIN, try another
-      pin = generatePin();
-      attempts++;
-      continue;
-    }
-    if (error) throw error;
-  }
-  throw new Error("Could not generate unique PIN");
+// Create a new guardian with a user-chosen PIN
+export async function createGuardianWithPin(pin: string, displayName?: string): Promise<Guardian> {
+  const { data, error } = await supabase
+    .from("guardians")
+    .insert({ pin, display_name: displayName || null })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
 }
 
 // Get all memory notes for a guardian as markdown context
