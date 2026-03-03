@@ -42,7 +42,7 @@ const ChatInput = ({ onSend, disabled, prefill }: Props) => {
   return (
     <div className="border-t border-border bg-card px-4 py-3">
       <p className="text-[10px] text-muted-foreground text-center mb-2">
-        This is AI guidance, not medical advice. Always consult your pediatrician.
+        AI guidance trained as a non-clinical lived experience peer — not medical advice.
       </p>
       <div className="flex items-end gap-2 max-w-3xl mx-auto">
         <textarea
