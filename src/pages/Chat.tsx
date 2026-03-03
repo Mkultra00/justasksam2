@@ -198,8 +198,9 @@ const Chat = () => {
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
         {messages.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p className="text-sm">Tell me what is going on. Is this a challenge in the moment? Or are you hoping to start building a plan?</p>
-            <p className="text-xs mt-1">I can help you or tell you when to seek help from clinical professionals.</p>
+            <p className="text-sm">Tell me what's going on. Is this something urgent right now, or are you hoping to start building a plan?</p>
+            <p className="text-xs mt-1">If there's no immediate crisis, let me learn about your family first — it helps me give better guidance over time.</p>
+            <p className="text-[10px] mt-2 text-muted-foreground/70">🔒 Remember to use code names for your family members, not real names.</p>
           </div>
         )}
         {messages.map((msg) => (
