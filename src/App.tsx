@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Chat from "./pages/Chat";
 import SettingsPage from "./pages/SettingsPage";
+import DesignDoc from "./pages/DesignDoc";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/design-doc" element={<DesignDoc />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
